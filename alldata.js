@@ -18,7 +18,7 @@ function AllData(){
       <Card
       index = {i}
       key = {i} 
-      bgcolor="primary"
+      bgcolor="success"
       txtcolor="white"
       header="All data Summary"
       text={userNumber(i)}
