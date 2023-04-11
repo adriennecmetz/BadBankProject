@@ -8,7 +8,7 @@ function Withdraw() {
 
   return (
       <Card
-        bgcolor="primary"
+        bgcolor="secondary"
         header="Withdraw"
         withdraw={handle}
         submitButtonWithdraw="Withdrawl Successful"
