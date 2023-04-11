@@ -8,7 +8,7 @@ function Deposit() {
 
   return (
       <Card
-        bgcolor="primary"
+        bgcolor="success"
         header="Deposit"
         deposit={handle}
         submitButtonDeposit="Deposit Successful"
