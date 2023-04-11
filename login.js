@@ -6,7 +6,7 @@ function Login() {
 
   return (
       <Card
-        bgcolor="primary"
+        bgcolor="success"
         header="Account Login"
         login={handle}
         submitButtonLogin="Welcome to Bad Bank!"
