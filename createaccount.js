@@ -15,7 +15,14 @@ function CreateAccount(){
       return true;
   }
   
-
+function validatePassword(password) {
+    if (password.length < 8) {
+      setStatus("Error: Password must be at least 8 characters long.");
+      setTimeout(() => setStatus(''),5000);
+      return false;
+    }
+    return true;
+  }
 
   function handleCreate(){
     console.log(name,email,password);
