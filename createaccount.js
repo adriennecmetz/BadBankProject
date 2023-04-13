@@ -28,7 +28,7 @@ function validatePassword(password) {
     console.log(name,email,password);
     if (!validate(name,     'name'))     return;
     if (!validate(email,    'email'))    return;
-    if (!validate(password, 'password')) return;
+    if (!validatePassword(password, 'password')) return;
     ctx.users.push({name,email,password,balance:100});
     setShow(false);
   }    
