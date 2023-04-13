@@ -1,4 +1,4 @@
-function AllData(){
+unction AllData(){
   const ctx = React.useContext(UserContext);
 
   let users = [...ctx.users];
@@ -18,7 +18,7 @@ function AllData(){
       <Card
       index = {i}
       key = {i} 
-      bgcolor="success"
+      bgcolor="primary"
       txtcolor="white"
       header="All data Summary"
       text={userNumber(i)}
