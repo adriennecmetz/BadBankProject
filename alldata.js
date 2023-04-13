@@ -1,4 +1,4 @@
-unction AllData(){
+function AllData(){
   const ctx = React.useContext(UserContext);
 
   let users = [...ctx.users];
