@@ -1,11 +1,11 @@
-function Balance(){
+function BalanceByName(){
     const [show, setShow]      = React.useState(true);
     const [status, setStatus]  = React.useState(' ');
 
     return(
         <Card 
         bgcolor="success"
-        header="Balance"
+        header="Enter Your Name"
         status={status}
         body={show ?
             <BalanceForm setShow={setShow}/>:
@@ -16,7 +16,7 @@ function Balance(){
 
 function BalanceMsg(props){
     return(<>
-    <h5>Your balance has been sent to your email</h5>
+    <h5>Your balance is {props.balance}</h5>
     <button type="submit"
     className="btn btn-light"
     onClick={() =>props.setShow(true)}>Back</button>
@@ -24,28 +24,26 @@ function BalanceMsg(props){
 }
 
 function BalanceForm(props){
-    const [email, setEmail]        = React.useState('');
+    const [name, setName]        = React.useState('');
     
 
-    function handle(){
-        console.log(email);
-        const url = `/account/balance/${email}`;
-        (async () => {
-            var res  = await fetch(url);
-            var data = await res.json();
-            console.log(data);
-        })();
+    async function handle(){
+        console.log(name);
+        const url = `/account/balance/${name}`;
+        var res  = await fetch(url);
+        var data = await res.json();
+        console.log(data);
         props.setShow(false);
-    
+        props.setBalance(data.balance);
     }
     return (<>
 
-    Email address<br/>
+    Name<br/>
     <input type="input"
     className="form-control"
-    placeholder="Enter email"
-    value={email}
-    onChange={e => setEmail(e.currentTarget.value)}/><br/>
+    placeholder="Enter name"
+    value={name}
+    onChange={e => setName(e.currentTarget.value)}/><br/>
 
     
     <button type="submit"
@@ -53,3 +51,4 @@ function BalanceForm(props){
     onClick={handle}>Show Balance</button>
     </>);
 }
+
