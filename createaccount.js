@@ -9,7 +9,7 @@ function CreateAccount(){
   function validate(field, label){
       if (!field) {
         setStatus('Error must include ' + label);
-        setTimeout(() => setStatus(''),7000);
+        setTimeout(() => setStatus(''),4000);
         return false;
       }
       return true;
@@ -18,7 +18,7 @@ function CreateAccount(){
 function validatePassword(password) {
     if (password.length < 8) {
       setStatus("Error: Password must be at least 8 characters long.");
-      setTimeout(() => setStatus(''),5000);
+      setTimeout(() => setStatus(''),4000);
       return false;
     }
     return true;
