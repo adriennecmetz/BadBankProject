@@ -106,6 +106,23 @@ function Card(props) {
             setShow(true);
         }
     }
+    
+      function handleBalance() {
+        console.log(name, `Deposit amount: ${deposit}`);
+        
+        if (name === users[currentUserIndex].name) {
+          //ctx.users.push({deposit});
+          users[currentUserIndex].balance += Number(deposit);
+          setShow(false);
+          return;
+        } else {
+            alert(`Incorrect User input.`);
+            clearForm();
+            setShow(true);
+        }
+    }
+
+    
 
     function handleWithdraw() {
         if (!validate(name,    'name'))       return;
