@@ -4,9 +4,26 @@ function CreateAccount() {
   let userNumber = users.length;
 
   function handle(data){
-      ctx.users.push({id: userNumber, name: data.name, email: data.email, password: data.password, balance:100 });
-      return true;
+  var name = data.name;
+  var email = data.email;
+  var password = data.password;
+
+  // Check if name, email, and password are empty
+  if (!name || !email || !password) {
+    alert("Please fill in all fields");
+    return false;
   }
+
+  // Check if password is at least 8 characters long
+  if (password.length < 8) {
+    alert("Password must be at least 8 characters long");
+    return false;
+  }
+
+  ctx.users.push({id: userNumber++, name: name, email: email, password: password, balance:100 });
+  return true;
+}
+
 
   return (
       <Card
