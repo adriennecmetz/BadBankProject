@@ -1,11 +1,8 @@
-function Balance() {
-    const ctx = React.useContext(UserContext); 
-    const [show, setShow]      = React.useState(true);
-    const [status, setStatus] = React.useState(' ');
-    
+function Deposit() {
+  const ctx = React.useContext(UserContext);
 
   function handle() {
-      ctx.users.push({ name: data.name, balance: data.balance});
+      ctx.users.push({name: data.name, deposit: data.deposit});
       return true;
   }
 
@@ -17,3 +14,4 @@ function Balance() {
         submitButtonDeposit="Deposit Successful"
       />
   )
+}
