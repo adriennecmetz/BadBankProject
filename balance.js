@@ -8,26 +8,30 @@ function Balance() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const user = ctx.users.find(user => user.name === data.name);
-    if (!user) {
+    const userIndex = ctx.users.findIndex(user => user.name === data.name);
+    if (userIndex === -1) {
       alert('User not found');
-      return;
+      return false;
     }
+    const user = {...ctx.users[userIndex]};
     user.balance += parseFloat(data.balance);
-    ctx.updateUser(user);
+    const updatedUsers = [...ctx.users];
+    updatedUsers[userIndex] = user;
+    ctx.setUsers(updatedUsers);
     setData({name: '', balance: 0});
+    return true;
   }
 
   return (
     <Card
-      bgcolor="primary"
+      bgcolor="success"
       header="Balance"
       submitButtonLabel="Update"
       onSubmit={handleSubmit}
     >
       <div className="form-group">
         <label htmlFor="name">Name:</label>
-        <input type="text" className="form-control" id="name" onChange={event => setData({...data, name: event.target.value})}/>
+        <input type="text" className="form-control" id="name" onChange={event => setData({...data, name: event.target.value})} value={data.name}/>
       </div>
       <div className="form-group">
         <label htmlFor="balance">Balance:</label>
