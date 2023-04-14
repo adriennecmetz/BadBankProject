@@ -14,22 +14,15 @@ function Balance(){
     )
 }
 
-function BalanceMsg(props){
-    return(<>
-    <h5>Your balance has been sent to your email</h5>
-    <button type="submit"
-    className="btn btn-light"
-    onClick={() =>props.setShow(true)}>Back</button>
-    </>);
-}
+
 
 function BalanceForm(props){
     const [email, setEmail]        = React.useState('');
     
 
     function handle(){
-        console.log(email);
-        const url = `/account/balance/${email}`;
+        console.log(name);
+        const url = `/account/balance/${name}`;
         (async () => {
             var res  = await fetch(url);
             var data = await res.json();
@@ -43,8 +36,8 @@ function BalanceForm(props){
     Email address<br/>
     <input type="input"
     className="form-control"
-    placeholder="Enter email"
-    value={email}
+    placeholder="Enter name"
+    value={name}
     onChange={e => setEmail(e.currentTarget.value)}/><br/>
 
     
