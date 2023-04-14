@@ -4,17 +4,46 @@ function Login() {
   const [show, setShow] = React.useState(true);
   const ctx = React.useContext(UserContext);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const user = ctx.users.find((user) => user.email === email && user.password === password);
-    if (user) {
-      ctx.setCurrentUser(user);
-      setEmail('');
-      setPassword('');
-    } else {
-      setShow(false);
+  
+  
+  function handleLogin() {
+    if (!validate(name,     'name'))     return;
+    if (!validate(password, 'password')) return;
+    for (let i = 0; i <= users.length - 1; i++){
+        if (i === (users.length -1) && users[i].name !== name) {
+            alert("Not a current user: Please create an account or try different credentials");
+            setShow(true);
+            clearForm();
+            return;
+        }
+        if (name !== users[i].name){
+            continue;
+        }
+        if (name === users[i].name && password !== users[i].password) {
+            alert("Incorrect Password, try again...");
+            setShow(true);
+            setPassword('');
+            return;
+        }
+        if (name === users[i].name && password === users[i].password){
+            let userID = users[i].id;
+            alert(`Current User is ${users[i].name} with id: ${userID}`);
+            setShow(false);
+            console.log(name, password, userID);
+            assignUserID(userID);
+            setName('');
+            setEmail('');
+            setPassword('');
+            setDeposit('');
+            setWithdraw('');
+            return;
+        }
     }
-  };
+}
+
+  
+);
+   
 
   return (
     <Card
