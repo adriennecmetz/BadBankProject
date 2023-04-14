@@ -5,7 +5,7 @@ function AllData(){
   console.log(JSON.stringify(users));
   
   function userNumber(i) {
-    return (`User Account ${i+1} Table`);
+    return (`User Account ${i+1} `);
   }
 
   function userInfo(user) {
@@ -18,7 +18,7 @@ function AllData(){
       <Card
       index = {i}
       key = {i} 
-      bgcolor="info"
+      bgcolor="success"
       txtcolor="white"
       header="All data Summary"
       text={userNumber(i)}
