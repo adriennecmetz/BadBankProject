@@ -25,37 +25,51 @@ function Card(props) {
     let userName = users[currentUserIndex].name;
     console.log(`Balance of ${userName} is ${balance}`);
   
-  
+  function validate(field, label) {
+    if (!field) {
+        setStatus('Error: Must complete field for ' + label);
+        setTimeout(() => setStatus(''), 7000);
+        alert(`Enter field: ${label}`);
+        return false;
+    }
+    if (field === deposit) {
+        if (deposit <= 0) {
+            alert("Invalid output, positive numbers only");
+            return false;
+        }
+    }
+    if (field === withdraw) {
+        if (withdraw <= 0) {
+            alert("Invalid output, positive numbers only");
+            return false;
+        }
+    }
+    if (field === email) {
+      if (email.includes('@') === true) return true;
+      else {
+        alert("Enter Valid Email");
+        return false;
+      }
+    }
+    return true;
+  }
+
+    function validateForm() {
+        return password.length > 8 && name.length > 1 && email.length > 1;
+    }
 
     function validateLogin() {
         return password.length > 8 && name.length > 1;
     }
     
-    function handleCreate(){
-  console.log(name,email,password);
-  if (!validate(name,     'Name'))     return;
-  if (!validate(email,    'Email'))    return;
-  if (!validatePassword(password))    return;
-  ctx.users.push({id: ctx.users.length+1, name, email, password, balance: 100});
-  setShow(false);
-  setStatus('Account created successfully.');
-}
-This will show an error message if the name or email field is left blank.
-
-
-
-
-
-
-    
-    function validate(field, label){
-    if (!field) {
-      setStatus('Error: ' + label + ' field cannot be blank.');
-      setTimeout(() => setStatus(''),3000);
-      return false;
+    function handleCreate() {
+        console.log(name, email, password);
+        if (!validate(name,     'name'))     return;
+        if (!validate(email,    'email'))    return;
+        if (!validatePassword(password, 'password')) return;
+        ctx.users.push({id: users.length+1, name, email, password, balance: 100});
+        setShow(false);
     }
-    return true;
-  }
     
     function clearForm() {
         setName('');
