@@ -21,6 +21,10 @@ function NavBar() {
               <a className="nav-link" href="#/withdraw/" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Withdraw money from your account">Withdraw</a>
             </li>
             <li className="nav-item">
+              <a className="nav-link" href="#/balance/" data-bs-toggle="tooltip" data-bs-placement="balance" title="View your account balance">Balance</a>
+            </li>
+    
+            <li className="nav-item">
               <a className="nav-link" href="#/alldata/" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View all your account data">AllData</a>
             </li>
           </ul>
