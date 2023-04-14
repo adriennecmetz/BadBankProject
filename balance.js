@@ -1,11 +1,11 @@
 function Balance(){
-    const [show, setShow]      = React.useState(true);
-    const [status, setStatus]  = React.useState(' ');
+  const ctx = React.useContex(UserContext);
 
     return(
         <Card 
         bgcolor="success"
         header="Balance"
+        // eslint-disable-next-line no-restricted-globals
         status={status}
         body={show ?
             <BalanceForm setShow={setShow}/>:
@@ -28,24 +28,18 @@ function BalanceForm(props){
     
 
     function handle(){
-        console.log(email);
-        const url = `/account/balance/${email}`;
-        (async () => {
-            var res  = await fetch(url);
-            var data = await res.json();
-            console.log(data);
-        })();
-        props.setShow(false);
-    
+      ctx.users.push({ name: data.name, balance: data.balance });
+      return true;
     }
+  
     return (<>
 
-    Email address<br/>
+   Name<br/>
     <input type="input"
     className="form-control"
-    placeholder="Enter email"
-    value={email}
-    onChange={e => setEmail(e.currentTarget.value)}/><br/>
+    placeholder="Enter name"
+    value={name}
+    onChange={e => setName(e.currentTarget.value)}/><br/>
 
     
     <button type="submit"
