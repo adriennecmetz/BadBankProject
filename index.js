@@ -2,7 +2,7 @@ function Spa() {
   return (
     <HashRouter>
       <NavBar/>
-      <UserContext.Provider value={{users:[{id: 1, name:'Adrienne',email:'adriennecmetz@gmail.com',password:'secret123',balance:50}]}}>
+      <UserContext.Provider value={{users:[{name:'Adrienne',email:'adriennecmetz@gmail.com',password:'secret123',balance:50}]}}>
         <div className="container" style={{padding: "100px"}}>
           <Route path="/" exact component={Home} />
           <Route path="/CreateAccount/" component={CreateAccount} />
