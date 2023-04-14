@@ -18,7 +18,6 @@ function Card(props) {
     const [password, setPassword]  = React.useState('');
     const [deposit, setDeposit]    = React.useState('');
     const [withdraw, setWithdraw]  = React.useState('');
-    const [balance, setBalance]    = React.useState('');
     const ctx = React.useContext(UserContext);
     let users = [...ctx.users];
     
@@ -89,7 +88,6 @@ function Card(props) {
         setPassword('');
         setDeposit('');
         setWithdraw('');
-        setBalance(''); 
         setShow(true);
     }
 
@@ -110,11 +108,11 @@ function Card(props) {
     }
     
       function handleBalance() {
-        console.log(name, `Balance amount: ${balance}`);
+        console.log(name, `Deposit amount: ${deposit}`);
         
         if (name === users[currentUserIndex].name) {
-          //ctx.users.push({balance});
-          users[currentUserIndex].balance += Number(balance);
+          //ctx.users.push({deposit});
+          users[currentUserIndex].balance += Number(deposit);
           setShow(false);
           return;
         } else {
