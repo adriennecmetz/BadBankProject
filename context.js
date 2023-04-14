@@ -58,7 +58,8 @@ function Card(props) {
         return password.length > 8 && name.length > 1 && email.length > 1;
     }
 
-   
+    function validateLogin() {
+        return password.length > 8 && name.length > 1;
     }
     
     function handleCreate() {
@@ -114,6 +115,43 @@ function Card(props) {
         
     }
 
+    
+        function handleLogin() {
+    if (!validate(name,     'name'))     return;
+    if (!validate(password, 'password')) return;
+    for (let i = 0; i <= users.length - 1; i++){
+        if (i === (users.length -1) && users[i].name !== name) {
+            alert("Not a current user: Please create an account or try different credentials");
+            setShow(true);
+            clearForm();
+            return;
+        }
+        if (name !== users[i].name){
+            continue;
+        }
+        if (name === users[i].name && password !== users[i].password) {
+            alert("Incorrect Password, try again...");
+            setShow(true);
+            setPassword('');
+            return;
+        }
+        if (name === users[i].name && password === users[i].password){
+            let userID = users[i].id;
+            alert(`Current User is ${users[i].name} with id: ${userID}`);
+            setShow(false);
+            console.log(name, password, userID);
+            assignUserID(userID);
+            setName('');
+            setEmail('');
+            setPassword('');
+            setDeposit('');
+            setWithdraw('');
+            return;
+        }
+    }
+}
+
+       
 
     function classes() {
         const bg = props.bgcolor ? ' bg-' + props.bgcolor : ' ';
@@ -189,7 +227,23 @@ function Card(props) {
                     </>
                     )
                 )}
-               
+                {props.login && show ? (
+                  <>
+                  Enter Account Name<br/>
+                  <input type="input" className="form-control" id="name" placeholder="Enter Name" value={name} onChange={e => setName(e.currentTarget.value)}/><br/> 
+                  Enter Password<br/>
+                  <input type="password" className="form-control" id="password" placeholder="Enter Password" value={password} onChange={e => setPassword(e.currentTarget.value)}/><br/>
+                  <button type="submit" disabled={!validateLogin()} className="btn btn-light" onClick={handleLogin} >Submit for verification</button>
+                  </>
+                ) : (props.submitButtonLogin && (
+                  <>
+                  <div className="card text-white text-center bg-success mb-3">
+                    <h5>Success</h5>
+                  </div>
+                  <button type="submit" className="btn btn-warning" onClick={clearForm} >Continue to Account</button>
+                  </>
+                  )
+                )}
                 {props.allData && (
                 <>
                   Name: {props.allData[0]}<br/>
