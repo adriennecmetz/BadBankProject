@@ -27,8 +27,8 @@ function Card(props) {
   
   function validate(field, label) {
     if (!field) {
-        setStatus('Error: Must complete field for ' + label);
-        setTimeout(() => setStatus(''), 7000);
+        setStatus('Error: ' + label);
+        setTimeout(() => setStatus(''), 3000);
         alert(`Enter field: ${label}`);
         return false;
     }
@@ -66,7 +66,7 @@ function Card(props) {
         console.log(name, email, password);
         if (!validate(name,     'name'))     return;
         if (!validate(email,    'email'))    return;
-        if (!validatePassword(password, 'password')) return;
+        if (!validate(password, 'password')) return;
         ctx.users.push({id: users.length+1, name, email, password, balance: 100});
         setShow(false);
     }
