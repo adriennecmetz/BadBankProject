@@ -1,8 +1,8 @@
 function Deposit() {
-  //const ctx = React.useContext(UserContext);
+  const ctx = React.useContext(UserContext);
 
   function handle() {
-      //ctx.users.push({name: data.name, deposit: data.deposit});
+      ctx.users.push({name: data.name, deposit: data.deposit});
       return true;
   }
 
