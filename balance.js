@@ -4,7 +4,7 @@ function Balance(){
 
     return(
         <Card 
-        bgcolor="info"
+        bgcolor="success"
         header="Balance"
         status={status}
         body={show ?
