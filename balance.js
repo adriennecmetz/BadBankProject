@@ -1,32 +1,48 @@
 function Balance() {
-  const [show, setShow] = React.useState(true);
-  const [status, setStatus] = React.useState('');
   const ctx = React.useContext(UserContext);
-  let balance = ctx.users[ctx.currentUserIndex].balance;
-  let userName = ctx.users[ctx.currentUserIndex].name;
+  const [data, setData] = React.useState({name: '', balance: 0});
 
+  function handleChange(event) {
+    setData({...data, balance: event.target.value});
+  }
+
+  function handleSubmit(event) {
+  event.preventDefault();
+  const user = ctx.users.find(user => user.name === data.name);
+  if (!user) {
+    alert('User not found');
+    return;
+  }
+  const balance = user.balance;
+  const userName = user.name;
   console.log(`Balance of ${userName} is ${balance}`);
+  setData({name: '', balance: 0});
+  return true;
+}
 
-  function handle() {
-    ctx.users.push({ name: data.name, balance: data.balance });
+  
+ 
+    console.log(`User balance for ${user.name}: ${user.balance}`);
+    user.balance += parseFloat(data.balance);
+    setData({name: '', balance: 0});
     return true;
   }
 
   return (
-    <>
-      <Card
-        bgcolor="success"
-        header="Balance"
-        status={status}
-        body={show ? <BalanceForm setShow={setShow} /> : <BalanceMsg setShow={setShow} />}
-      />
-      Name
-      <br />
-      <input type="input" className="form-control" placeholder="Enter name" value={name} onChange={(e) => setName(e.currentTarget.value)} />
-      <br />
-      <button type="submit" className="btn btn-light" onClick={handle}>
-        Show Balance
-      </button>
-    </>
+    <Card
+      bgcolor="primary"
+      header="Balance"
+      submitButtonLabel="Update"
+      onSubmit={handleSubmit}
+    >
+      <div className="form-group">
+        <label htmlFor="name">Name:</label>
+        <input type="text" className="form-control" id="name" onChange={event => setData({...data, name: event.target.value})}/>
+      </div>
+      <div className="form-group">
+        <label htmlFor="balance">Balance:</label>
+        <input type="number" className="form-control" id="balance" onChange={handleChange} value={data.balance}/>
+      </div>
+    </Card>
   );
 }
