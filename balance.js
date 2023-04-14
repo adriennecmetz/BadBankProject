@@ -1,6 +1,6 @@
 function Balance() {
   const ctx = React.useContext(UserContext);
-  const [data, setData] = React.useState({balance: 0});
+  const [data, setData] = React.useState({name: '', balance: 0});
 
   function handleChange(event) {
     setData({...data, balance: event.target.value});
@@ -14,8 +14,8 @@ function Balance() {
       return;
     }
     user.balance += parseFloat(data.balance);
-    setData({balance: 0});
-    return true;
+    ctx.updateUser(user);
+    setData({name: '', balance: 0});
   }
 
   return (
