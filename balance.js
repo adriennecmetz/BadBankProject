@@ -7,12 +7,21 @@ function Balance() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    const user = ctx.users.find(user => user.name === data.name);
-    if (!user) {
-      alert('User not found');
-      return;
-    }
+  event.preventDefault();
+  const user = ctx.users.find(user => user.name === data.name);
+  if (!user) {
+    alert('User not found');
+    return;
+  }
+  const balance = user.balance;
+  const userName = user.name;
+  console.log(`Balance of ${userName} is ${balance}`);
+  setData({name: '', balance: 0});
+  return true;
+}
+
+  
+ 
     console.log(`User balance for ${user.name}: ${user.balance}`);
     user.balance += parseFloat(data.balance);
     setData({name: '', balance: 0});
