@@ -63,13 +63,24 @@ function Card(props) {
     }
     
     function handleCreate() {
-        console.log(name, email, password);
-        if (!validate(name,     'name'))     return;
-        if (!validate(email,    'email'))    return;
-        if (!validate(password, 'password')) return;
-        ctx.users.push({id: users.length+1, name, email, password, balance: 100});
-        setShow(false);
+    console.log(name, email, password);
+    if (!validate(name, 'name')) {
+        alert('Invalid name. Please enter a valid name.');
+        return;
     }
+    if (!validate(email, 'email')) {
+        alert('Invalid email. Please enter a valid email address.');
+        return;
+    }
+    if (!validate(password, 'password')) {
+        alert('Invalid password. Please enter a valid password.');
+        return;
+    }
+    ctx.users.push({id: users.length+1, name, email, password, balance: 100});
+    setShow(false);
+}
+
+    
     
     function clearForm() {
         setName('');
