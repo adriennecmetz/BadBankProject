@@ -28,7 +28,7 @@ function Card(props) {
   function validate(field, label) {
     if (!field) {
         setStatus('Error: Must complete field for ' + label);
-        setTimeout(() => setStatus(''), 3000);
+        setTimeout(() => setStatus(''), 7000);
         alert(`Enter field: ${label}`);
         return false;
     }
