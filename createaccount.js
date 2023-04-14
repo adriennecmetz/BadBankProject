@@ -1,70 +1,49 @@
 function CreateAccount() {
-  const [show, setShow]       = React.useState(true);
-  const [status, setStatus]   = React.useState('');
-  const [name, setName]       = React.useState('');
-  const [email, setEmail]     = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const ctx = React.useContext(userContext); 
+  const ctx = React.useContext(UserContext);
+  const [nextUserId, setNextUserId] = React.useState(1);
 
-  function clearForm() {
-    setName('');
-    setEmail('');
-    setPassword('');
-    setShow(true);
-  }
+  function handle(data){
+    var name = data.name;
+    var email = data.email;
+    var password = data.password;
 
-  function validate(field, label) {
-    if (!field) {
-      setStatus('Error must input' + label);
-      setTimeout(() => setStatus(''), 4000);
+    // Check if name, email, and password are empty
+    if (!name || !email || !password) {
+      alert("Please fill in all fields");
       return false;
     }
+
+    // Check if password is at least 8 characters long
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long");
+      return false;
+    }
+
+    // Create a new user with a unique ID
+    const newUser = {
+      id: nextUserId,
+      name: name,
+      email: email,
+      password: password,
+      balance: 100
+    };
+
+    // Add the new user to the context's users array
+    ctx.users.push(newUser);
+
+    // Increment the nextUserId variable for the next user
+    setNextUserId(nextUserId + 1);
+
+    // Return true to indicate that the form was submitted successfully
     return true;
   }
 
-  function handleCreate() {
-    console.log(name, email, password);
-    if (!validate(name, 'name')) return;
-    if (!validate(email, 'email')) return;
-    if (!validate) (password, 'password') return;
-    ctx.users.push({ name, email, password, balance: 100 });
-    setShow(false); 
-    }
-
-
-
-  
   return (
     <Card
       bgcolor="success"
       header="Create Account"
-      status={status}
-      body={show ? (
-        <>
-        Name </br>
-        <input type = "input" className ="form-control" id="name"
-         placeholder="Enter name" value ={name} 
-         onChange= {e => setName(e.currentTarget.value)} /><br/>
-
-        Email </br>
-        <input type = "input" className ="form-control" id="email"
-         placeholder="Enter email" value ={email} 
-         onChange= {e => setEmail(e.currentTarget.value)} /><br/>
-        
-        Password </br>
-        <input type = "input" className ="form-control" id="password"
-         placeholder="Enter password" value ={password} 
-         onChange= {e => setPassword(e.currentTarget.value)} /><br/>
-        
-        <button type ="submit" className="btn btn-light" onClick={handleCreate}>Create Account</button>
-        </>
-          
-      ):(
-        <>
-          <h5>Success</h5>
-          <button type="submit" className="btn btn-light" onClick={clearForm}>Add Another Account</button>
-        </>
-        
-      )}
-
-  
+      handle={handle}
+      submitButton="Create another account"
+    />
+  );
+}
