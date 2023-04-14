@@ -14,29 +14,11 @@ function Login() {
     } else {
       setShow(false);
     }
-  
-  
-            setName('');
-            setEmail('');
-            setPassword('');
-            setDeposit('');
-            setWithdraw('');
-            return;
-        }
-    }
-};
+  };
 
-  
-  
-  
-  
-  
-  
-  
-  
   return (
     <Card
-      bgcolor="success"
+      bgcolor="primary"
       header="Login"
       status={show ? '' : 'Invalid email or password'}
       body={
