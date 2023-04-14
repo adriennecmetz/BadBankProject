@@ -1,55 +1,38 @@
-function Balance(){
-    const [show, setShow]      = React.useState(true);
-    const [status, setStatus]  = React.useState(' ');
+function Balance() {
+  const ctx = React.useContext(UserContext);
+  const [data, setData] = React.useState({balance: 0});
 
-    return(
-        <Card 
-        bgcolor="success"
-        header="Balance"
-        status={status}
-        body={show ?
-            <BalanceForm setShow={setShow}/>:
-                <BalanceMsg setShow={setShow}/>}
-    /> 
-    )
-}
+  function handleChange(event) {
+    setData({...data, balance: event.target.value});
+  }
 
-function BalanceMsg(props){
-    return(<>
-    <h5>Your balance has been sent to your email</h5>
-    <button type="submit"
-    className="btn btn-light"
-    onClick={() =>props.setShow(true)}>Back</button>
-    </>);
-}
-
-function BalanceForm(props){
-    const [email, setEmail]        = React.useState('');
-    
-
-    function handle(){
-        console.log(email);
-        const url = `/account/balance/${email}`;
-        (async () => {
-            var res  = await fetch(url);
-            var data = await res.json();
-            console.log(data);
-        })();
-        props.setShow(false);
-    
+  function handleSubmit(event) {
+    event.preventDefault();
+    const user = ctx.users.find(user => user.name === data.name);
+    if (!user) {
+      alert('User not found');
+      return;
     }
-    return (<>
+    user.balance += parseFloat(data.balance);
+    setData({balance: 0});
+    return true;
+  }
 
-    Email address<br/>
-    <input type="input"
-    className="form-control"
-    placeholder="Enter email"
-    value={email}
-    onChange={e => setEmail(e.currentTarget.value)}/><br/>
-
-    
-    <button type="submit"
-    className="btn btn-light"
-    onClick={handle}>Show Balance</button>
-    </>);
+  return (
+    <Card
+      bgcolor="primary"
+      header="Balance"
+      submitButtonLabel="Update"
+      onSubmit={handleSubmit}
+    >
+      <div className="form-group">
+        <label htmlFor="name">Name:</label>
+        <input type="text" className="form-control" id="name" onChange={event => setData({...data, name: event.target.value})}/>
+      </div>
+      <div className="form-group">
+        <label htmlFor="balance">Balance:</label>
+        <input type="number" className="form-control" id="balance" onChange={handleChange} value={data.balance}/>
+      </div>
+    </Card>
+  );
 }
