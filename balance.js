@@ -2,6 +2,7 @@ function Balance(){
     const [show, setShow]      = React.useState(true);
     const [status, setStatus]  = React.useState(' ');
 
+      console.log(`Balance of ${userName} is ${balance}`);
     return(
         <Card 
         bgcolor="success"
