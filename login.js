@@ -18,7 +18,7 @@ function Login() {
 
   return (
     <Card
-      bgcolor="primary"
+      bgcolor="success"
       header="Login"
       status={show ? '' : 'Invalid email or password'}
       body={
