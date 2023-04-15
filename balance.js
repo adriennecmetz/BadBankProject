@@ -1,55 +1,84 @@
-function Balance(){
-    const [show, setShow]      = React.useState(true);
-    const [status, setStatus]  = React.useState(' ');
+function Balance() {
+  const [show, setShow] = React.useState(true);
+  const [status, setStatus] = React.useState('');
+  const [balance, setBalance] = React.useState(null);
 
-    return(
-        <Card 
-        bgcolor="success"
-        header="Balance"
-        status={status}
-        body={show ?
-            <BalanceForm setShow={setShow}/>:
-                <BalanceMsg setShow={setShow}/>}
-    /> 
-    )
+  return (
+    <Card
+      bgcolor="success"
+      header="Balance"
+      status={status}
+      body={
+        show ? (
+          <BalanceForm setShow={setShow} setBalance={setBalance} setStatus={setStatus} />
+        ) : (
+          <div>
+            {balance !== null ? (
+              <>
+                <h5>Account Balance:</h5>
+                <p>{balance}</p>
+              </>
+            ) : (
+              <p>Cannot retrieve balance</p>
+            )}
+            <button type="submit" className="btn btn-light" onClick={() => setShow(true)}>
+              Back
+            </button>
+          </div>
+        )
+      }
+    />
+  );
 }
 
-function BalanceMsg(props){
-    return(<>
-    <h5>Your balance has been sent to your email</h5>
-    <button type="submit"
-    className="btn btn-light"
-    onClick={() =>props.setShow(true)}>Back</button>
-    </>);
+function BalanceMsg(props) {
+  return (
+    <>
+      <h5>Your account balance is:</h5>
+      <p>{props.balance}</p>
+      <button type="submit" className="btn btn-light" onClick={() => props.setShow(true)}>
+        Back
+      </button>
+    </>
+  );
 }
 
-function BalanceForm(props){
-    const [email, setEmail]        = React.useState('');
-    
+function BalanceForm(props) {
+  const [email, setEmail] = React.useState('');
 
-    function handle(){
-        console.log(email);
-        const url = `/account/balance/${email}`;
-        (async () => {
-            var res  = await fetch(url);
-            var data = await res.json();
-            console.log(data);
-        })();
-        props.setShow(false);
-    
+  async function handle() {
+    if (email.trim() === '') {
+      props.setStatus('Please enter an account name');
+      return;
     }
-    return (<>
 
-    Email address<br/>
-    <input type="input"
-    className="form-control"
-    placeholder="Enter email"
-    value={email}
-    onChange={e => setEmail(e.currentTarget.value)}/><br/>
+    const url = `/account/balance/${email}`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-    
-    <button type="submit"
-    className="btn btn-light"
-    onClick={handle}>Show Balance</button>
-    </>);
+    if (res.status === 200) {
+      props.setBalance(data.balance);
+      props.setShow(false);
+    } else {
+      props.setStatus(`Error retrieving balance for ${email}`);
+    }
+  }
+
+  return (
+    <>
+      Account Name<br />
+      <input
+        type="input"
+        className="form-control"
+        placeholder="Enter Account Name"
+        value={email}
+        onChange={(e) => setEmail(e.currentTarget.value)}
+      />
+      <br />
+      {props.status && <p>{props.status}</p>}
+      <button type="submit" className="btn btn-light" onClick={handle}>
+        Show Balance
+      </button>
+    </>
+  );
 }
