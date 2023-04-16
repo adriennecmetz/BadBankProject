@@ -9,3 +9,5 @@ https://adrienne-metzbankingapplication.s3.us-west-1.amazonaws.com/index.html#/
 I would recommend using bootstrap Forms. I did not use a form here (see code) and it's bulky and hard to manage. Using Form components would have allowed me create reusable and maintainable code. 
 
 This was very challenging from the start and if I were to do this project again, I would approach it completely different to how I did it, but I guess that's part of the learning process and at the end of day, happy I was able to get a working site. 
+
+https://youtu.be/3w1nVtX1Ipk
