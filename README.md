@@ -15,6 +15,8 @@ Clone locally
 Install dependencies using npm install or yarn install
 Start development server using npm start or yarn start
 Run test suite using npm run test or yarn test
-Technology Used
+
+
+<h1>Technology Used</h1>
 This project uses React, Express, and MongoDB.
 
