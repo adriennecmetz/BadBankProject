@@ -13,3 +13,13 @@ This was very challenging from the start and if I were to do this project again,
 
 
 https://youtu.be/GoO4s1WWRw0
+
+Installation
+Fork repository
+Clone locally
+Install dependencies using npm install or yarn install
+Start development server using npm start or yarn start
+Run test suite using npm run test or yarn test
+Technology Used
+This project uses React, Express, and MongoDB.
+
