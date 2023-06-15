@@ -9,12 +9,13 @@ https://adrienne-metzbankingapplication.s3.us-west-1.amazonaws.com/index.html#/
 
 https://youtu.be/GoO4s1WWRw0
 
-<h1> Installation</h1
+<h1> Installation</h1>
 Fork repository
 Clone locally
 Install dependencies using npm install or yarn install
 Start development server using npm start or yarn start
 Run test suite using npm run test or yarn test
+
 
 
 <h1>Technology Used</h1>
